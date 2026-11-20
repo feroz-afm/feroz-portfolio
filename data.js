@@ -36,6 +36,7 @@ const KAGGLE = { rank: 469, total: "57,237", best: 433, notebooks: 56, medals: 2
    time someone opens the site. Change GITHUB_SHOW to show more or fewer cards. */
 const GITHUB_USER = "feroz-afm";
 const GITHUB_SHOW = 6;
+const GITHUB_HIDE = ["feroz-afm", "feroz-portfolio"]; // repositories to leave out of the strip
 
 /* ---------- 2. "Specialized in" line under your name ---------- */
 const SPECIALTIES = ["Computer Vision","Deep Learning","Generative AI"];
