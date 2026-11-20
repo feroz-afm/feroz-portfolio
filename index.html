@@ -758,7 +758,7 @@ document.querySelectorAll('[data-kg]').forEach(e=>{const v=KAGGLE[e.dataset.kg];
 (async()=>{try{
   let data=null;const key='gh_repos_v1';
   try{const c=JSON.parse(sessionStorage.getItem(key)||'null');if(c&&Date.now()-c.t<600000)data=c.d}catch(e){}
-  if(!data){const r=await fetch('https://api.github.com/users/'+GITHUB_USER+'/repos?sort=pushed&per_page=30');if(!r.ok)return;data=await r.json();try{sessionStorage.setItem(key,JSON.stringify({t:Date.now(),d:data}))}catch(e){}}
+  if(!data){let r=null;try{r=await fetch('api/repos')}catch(e){}if(!r||!r.ok){try{r=await fetch('https://api.github.com/users/'+GITHUB_USER+'/repos?sort=pushed&per_page=30')}catch(e){return}}if(!r||!r.ok)return;data=await r.json();if(!Array.isArray(data))return;try{sessionStorage.setItem(key,JSON.stringify({t:Date.now(),d:data}))}catch(e){}}
   const esc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const list=data.filter(x=>!x.fork&&!x.archived&&x.name!==GITHUB_USER).slice(0,GITHUB_SHOW);
   if(!list.length)return;

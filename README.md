@@ -29,6 +29,6 @@ Text in other sections (About, Kaggle numbers, Certifications, Education, Leader
 
 ## Keeping the numbers up to date
 
-- **GitHub (automatic):** the "Latest on GitHub" strip under Projects loads your newest public repositories from `github.com/feroz-afm` every time the site opens. Nothing to edit. If GitHub is slow or rate limited the strip simply hides itself. Change `GITHUB_SHOW` in `data.js` to show more or fewer cards.
+- **GitHub (automatic):** the "Latest on GitHub" strip under Projects shows your newest public repositories from `github.com/feroz-afm`. On Vercel it reads them through `api/repos.js`, which caches the answer for an hour so GitHub's rate limit never blocks visitors. Nothing to edit. If GitHub is unreachable the strip simply hides itself. Change `GITHUB_SHOW` in `data.js` to show more or fewer cards.
 - **Kaggle (one place to edit):** Kaggle has no public feed a website can read, so open `data.js`, find `KAGGLE`, and change the numbers (rank, notebooks, datasets, medals...). Every place on the site and its hero stats follow that one line. The CV PDF is separate and needs a rebuild.
 - Your **Projects cards, Demos and Skills** are still edited in `data.js` (`PROJECTS`, `DEMOS`, `SKILLS`).
