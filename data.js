@@ -152,7 +152,7 @@ const SKILLS = [
   ["Volunteer coordination","fa-solid fa-hands-holding-circle","lead","PUB Blood AID, BDOAA"],
   ["Public communication","fa-solid fa-bullhorn","lead","campus ambassador"],
   ["Outreach & promotion","fa-solid fa-share-nodes","lead","student campaigns"],
-  ["Budgeting","fa-solid fa-coins","lead","IEEE PUB Treasurer"],
+  ["Budgeting","fa-solid fa-coins","lead","IEEE PUB Treasurer, 2025 onward"],
   ["Arduino","fa-solid fa-microchip","robo","UNO, Nano, Arduino IDE"],
   ["Embedded C/C++","fa-solid fa-code","robo lang"],
   ["Motor control","fa-solid fa-gears","robo","L298N, PWM"],
