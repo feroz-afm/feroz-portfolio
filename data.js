@@ -146,7 +146,7 @@ const SKILLS = [
   ["Jupyter & Colab","fa-solid fa-book-open","ops remote","GPU training"],
   ["English communication","fa-solid fa-comments","remote"],
   ["Documentation","fa-solid fa-file-lines","remote","README, notebooks"],
-  ["Team leadership","fa-solid fa-people-group","remote lead","club GS, team leader"],
+  ["Team leadership","fa-solid fa-people-group","remote lead","Club GS, Blood AID Joint GS, team leader"],
   ["Async collaboration","fa-solid fa-clock","remote","GitHub teams, UTC+6"],
   ["Event & program management","fa-solid fa-calendar-check","lead","olympiads, hackathons"],
   ["Volunteer coordination","fa-solid fa-hands-holding-circle","lead"],
