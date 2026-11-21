@@ -261,8 +261,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,14,26,.82)
 .thumb:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 0 #03060d}
 .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .thumb:hover img{transform:scale(1.06)}
-.thumb[data-full*="cert"] img{object-fit:contain;padding:6px;background:#0b1222}
-.thumb[data-full*="cert"]:hover img{transform:scale(1.03)}
+.thumb[data-full*="cert"] img,.thumb[data-full="img/nasa26-team.jpg"] img,.thumb[data-full*="banner"] img{object-fit:contain;padding:6px;background:#0b1222}
+.thumb[data-full*="cert"]:hover img,.thumb[data-full="img/nasa26-team.jpg"]:hover img,.thumb[data-full*="banner"]:hover img{transform:scale(1.03)}
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(3,6,13,.92);display:none;align-items:center;justify-content:center;padding:4vw}
 .lightbox.open{display:flex}
 .lightbox img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
