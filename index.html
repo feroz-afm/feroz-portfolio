@@ -297,8 +297,51 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .foot a:hover{color:var(--accent)}
 
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(28px);filter:blur(8px);transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--rd,0s),transform .8s cubic-bezier(.2,.7,.2,1) var(--rd,0s),filter .8s ease var(--rd,0s)}
+.reveal.in{opacity:1;transform:none;filter:none}
+.reveal.done{transition:transform .25s ease,border-color .25s,box-shadow .25s}
+
+/* scroll progress */
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:70;pointer-events:none}
+
+/* floating pill nav (desktop) */
+@media (min-width:1021px){
+  nav{transition:padding .35s ease,background .35s ease,border-color .35s ease}
+  .nav-in{border:1px solid transparent;border-radius:20px;transition:width .5s cubic-bezier(.2,.7,.2,1),height .35s ease,padding .35s ease,background .35s ease,border-color .35s ease,box-shadow .35s ease}
+  nav.scrolled{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent;padding-top:12px}
+  nav.scrolled .nav-in{width:min(1020px,92%);height:58px;padding:0 12px 0 10px;background:rgba(10,14,26,.74);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:rgba(255,255,255,.1);box-shadow:0 14px 44px rgba(0,0,0,.5)}
+  nav.scrolled .logo-badge{width:36px;height:36px;font-size:.9rem}
+  .logo-badge{transition:width .35s,height .35s,font-size .35s}
+}
+
+/* tools marquee */
+.mq{overflow:hidden;padding:20px 0;border-block:1px solid var(--line);background:rgba(255,255,255,.015);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq-track{display:flex;gap:14px;width:max-content;padding-right:14px;animation:mq 50s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq-item{display:flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);font-weight:600;font-size:.9rem;white-space:nowrap;transition:color .2s,border-color .2s,transform .2s}
+.mq-item i{color:var(--accent);font-size:1rem}
+.mq-item:hover{color:#fff;border-color:rgba(34,211,238,.5);transform:translateY(-2px)}
+
+/* skill card: dotted level meter on hover */
+.skill{padding-bottom:46px}
+.skill i,.skill svg{transition:transform .35s cubic-bezier(.3,1.5,.5,1),color .25s,text-shadow .25s}
+.skill:hover i{transform:scale(1.18) translateY(-2px);color:#67e8f9;text-shadow:0 0 22px rgba(34,211,238,.6)}
+.meter{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease}
+.skill:hover .meter{opacity:1;transform:none}
+.meter .dots{flex:1;display:flex;gap:2px}
+.meter .dots span{flex:1;height:5px;border-radius:2px;background:rgba(255,255,255,.1);transition:background .2s ease,box-shadow .2s ease}
+.skill:hover .meter .dots span.on{background:var(--accent);box-shadow:0 0 8px rgba(34,211,238,.65);transition-delay:calc(var(--k)*30ms)}
+.meter em{font-style:normal;font-size:.68rem;font-weight:700;color:var(--accent);font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* timeline: line draws in, dots pop, cards nudge */
+.tl::before{transform-origin:top;transform:scaleY(0);transition:transform 1.6s cubic-bezier(.3,.6,.2,1)}
+.tl.drawn::before{transform:scaleY(1)}
+.tl-item.reveal::before{transform:scale(0);transition:transform .5s cubic-bezier(.3,1.7,.5,1) calc(var(--rd,0s) + .3s),background .25s,box-shadow .25s}
+.tl-item.reveal.in::before{transform:scale(1)}
+.tl-item:hover::before{background:var(--accent);box-shadow:0 0 0 6px rgba(34,211,238,.2)}
+.award.tl-item:hover::before{background:var(--amber);box-shadow:0 0 0 6px rgba(251,191,36,.2)}
+.tl-item .card:hover{transform:translateX(6px)}
 
 @media (max-width:1020px){
   .links{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:#0d1222;padding:12px 4%;border-bottom:1px solid var(--line)}
@@ -322,11 +365,14 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 @media (max-height:980px){.scroll-cue{display:none}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
+  .reveal{opacity:1;transform:none;filter:none}
+  .tl::before{transform:none}
+  .tl-item.reveal::before{transform:none}
 }
 </style>
 </head>
 <body>
+<div id="prog" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap nav-in">
@@ -378,6 +424,8 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   </div>
   <a href="#about" class="scroll-cue"><span class="mouse"></span>SCROLL</a>
 </header>
+
+<div class="mq" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
 
 <!-- ABOUT -->
 <section id="about" class="alt">
@@ -802,7 +850,11 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 
 /* ---------- render ---------- */
 const sg=document.getElementById('skill-grid');
-sg.innerHTML=SKILLS.map(([n,ic,c,note])=>`<div class="card skill tilt" data-c="${c}"><i class="${ic}"></i><b>${n}</b>${note?`<small>${note}</small>`:''}</div>`).join('');
+const DOTS=16;
+sg.innerHTML=SKILLS.map(([n,ic,c,note,pct])=>{const v=pct||(c.split(' ').includes('core')?90:75),on=Math.round(v/100*DOTS);
+  return `<div class="card skill tilt" data-c="${c}"><i class="${ic}"></i><b>${n}</b>${note?`<small>${note}</small>`:''}<div class="meter" aria-hidden="true"><div class="dots">${Array.from({length:DOTS},(_,k)=>`<span class="${k<on?'on':''}" style="--k:${k}"></span>`).join('')}</div><em>${v}%</em></div></div>`}).join('');
+const mqItems=SKILLS.filter(x=>x[2].split(' ').includes('core')).map(([n,ic])=>`<span class="mq-item"><i class="${ic}"></i>${n}</span>`).join('');
+document.getElementById('mq').innerHTML=mqItems+mqItems;
 const pg=document.getElementById('proj-grid');
 pg.innerHTML=PROJECTS.map(p=>`<article class="card proj tilt" data-c="${p.c}">
   <div class="proj-top ${p.g}${p.img?' has-img':''}"${p.img?` style="background-image:url('${p.img}')"`:''}>${p.lead?'<span class="lead-badge">Team leader</span>':''}${p.img?'':`<i class="${p.i}"></i>`}</div>
@@ -837,8 +889,30 @@ if(!reduce&&matchMedia('(hover:hover)').matches){
 }
 
 /* ---------- reveal ---------- */
-const io=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12}):null;
+const io=('IntersectionObserver' in window)?new IntersectionObserver(es=>{
+  es.filter(en=>en.isIntersecting).forEach((en,k)=>{const t=en.target;t.style.setProperty('--rd',(Math.min(k,6)*0.08).toFixed(2)+'s');t.classList.add('in');io.unobserve(t);setTimeout(()=>t.classList.add('done'),1500);});
+},{threshold:.12}):null;
 document.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('in'));
+
+/* ---------- timeline line draw ---------- */
+const tio=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('drawn');tio.unobserve(en.target);}}),{threshold:.04}):null;
+document.querySelectorAll('.tl').forEach(el=>tio?tio.observe(el):el.classList.add('drawn'));
+
+/* ---------- count-up numbers ---------- */
+const cio=('IntersectionObserver' in window&&!reduce)?new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return;cio.unobserve(en.target);
+  const el=en.target,m=el.textContent.trim().match(/^(\D*)([\d,.]+)(.*)$/);if(!m)return;
+  const end=parseFloat(m[2].replace(/,/g,'')),dec=(m[2].split('.')[1]||'').length,comma=m[2].includes(',');
+  const fmt=v=>{let t=v.toFixed(dec);if(comma)t=Number(t).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});return m[1]+t+m[3]};
+  const t0=performance.now(),dur=1300;
+  (function step(now){const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(end*e);if(p<1)requestAnimationFrame(step);else el.textContent=fmt(end);})(t0);
+}),{threshold:.6}):null;
+if(cio)document.querySelectorAll('.stat b,.kg-stat b').forEach(el=>cio.observe(el));
+
+/* ---------- pill nav + progress bar ---------- */
+const navEl=document.querySelector('nav'),prog=document.getElementById('prog');
+const onScrollFx=()=>{navEl.classList.toggle('scrolled',scrollY>40);const h=document.documentElement.scrollHeight-innerHeight;prog.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';};
+addEventListener('scroll',onScrollFx,{passive:true});onScrollFx();
 
 /* ---------- active nav + mobile menu ---------- */
 const links=[...document.querySelectorAll('.links a')];
