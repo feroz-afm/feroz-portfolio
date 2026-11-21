@@ -18,7 +18,7 @@ Files:
    - New skill: copy one `["...", "...", "..."],` line in `SKILLS`.
 3. Save, open `index.html` in a browser to check, then push to GitHub. Vercel redeploys automatically.
 
-Text in other sections (About, Kaggle numbers, Certifications, Education, Leadership, Research interests) lives in `index.html`: search for the words you want to change and edit them there.
+Text in other sections (About, Kaggle numbers, Certifications, Education, Leadership, Research interests) lives in `index.html`: search for the words you want to change and edit them there. In the Journey section, Education is the first `<div class="tl">` and Leadership the second; they are shown one under the other.
 
 ## Deploy on Vercel
 
