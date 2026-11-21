@@ -26,6 +26,8 @@ Text in other sections (About, Kaggle numbers, Certifications, Education, Leader
 2. On vercel.com, sign in with GitHub, choose **Add New → Project**, pick the repository and click **Deploy**.
 3. Every later push to GitHub updates the live site.
 
+Live site: https://feroz-portfolio-h82y.vercel.app/
+
 
 ## Keeping the numbers up to date
 
