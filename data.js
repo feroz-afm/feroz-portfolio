@@ -149,7 +149,7 @@ const SKILLS = [
   ["Team leadership","fa-solid fa-people-group","remote lead","Club GS, Blood AID Joint GS, team leader"],
   ["Async collaboration","fa-solid fa-clock","remote","GitHub teams, UTC+6"],
   ["Event & program management","fa-solid fa-calendar-check","lead","olympiads, hackathons"],
-  ["Volunteer coordination","fa-solid fa-hands-holding-circle","lead"],
+  ["Volunteer coordination","fa-solid fa-hands-holding-circle","lead","PUB Blood AID, BDOAA"],
   ["Public communication","fa-solid fa-bullhorn","lead","campus ambassador"],
   ["Outreach & promotion","fa-solid fa-share-nodes","lead","student campaigns"],
   ["Budgeting","fa-solid fa-coins","lead","IEEE PUB Treasurer"],
