@@ -384,6 +384,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 }
 
 /* ---------- pages ---------- */
+.pg.off{display:none!important}
 .one{max-width:920px;margin:0 auto}
 </style>
 </head>
@@ -410,7 +411,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </nav>
 
 <!-- HERO -->
-<header class="hero" id="home">
+<header class="pg hero" id="home" data-pages="home">
   <div class="circuit"></div>
   <div class="wrap hero-grid">
     <div>
@@ -442,10 +443,10 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   <a href="#about" class="scroll-cue"><span class="mouse"></span>SCROLL</a>
 </header>
 
-<div class="mq" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
+<div class="pg mq" aria-hidden="true" data-pages="home"><div class="mq-track" id="mq"></div></div>
 
 <!-- ABOUT -->
-<section id="about" class="alt">
+<section id="about" class="pg alt" data-pages="home">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-user"></i>About me</span><h2>Turning images and data into working AI</h2></div>
     <figure class="banner reveal"><img src="img/profile-banner.jpg" alt="Md Feroz Ahmed, AI and Machine Learning Engineer, specialized in Computer Vision, Deep Learning and Generative AI" loading="lazy"></figure>
@@ -475,7 +476,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" class="pg" data-pages="home">
   <div class="circuit"></div>
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-star"></i>Skills</span><h2>Tools I build with</h2><p>Grouped by area. Pick a category to filter.</p></div>
@@ -498,7 +499,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- PROJECTS -->
-<section id="research" class="alt">
+<section id="research" class="pg alt" data-pages="home">
   <div class="wrap">
     <div class="research reveal">
       <span class="eyebrow"><i class="fa-solid fa-flask"></i>Research interests</span>
@@ -512,7 +513,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   </div>
 </section>
 
-<section id="projects" class="alt">
+<section id="projects" class="pg alt" data-pages="projects">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-diagram-project"></i>Projects</span><h2>Best work</h2><p>Selected projects from GitHub, Kaggle and team events. The rest is on my profiles.</p></div>
     <div class="proj-grid" id="proj-grid"></div>
@@ -528,7 +529,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- DEMOS -->
-<section id="demos">
+<section id="demos" class="pg" data-pages="projects">
   <div class="circuit"></div>
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-circle-play"></i>Demos</span><h2>See it running</h2><p>Video demos of my projects.</p></div>
@@ -537,7 +538,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- KAGGLE -->
-<section id="kaggle" class="alt">
+<section id="kaggle" class="pg alt" data-pages="kaggle">
   <div class="circuit"></div>
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-brands fa-kaggle"></i>Kaggle</span><h2>Notebooks Expert</h2><p>Public work on Kaggle, as of <span data-kg="updated">November 2026</span>.</p></div>
@@ -584,7 +585,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- CERTIFICATIONS -->
-<section id="certifications" class="alt">
+<section id="certifications" class="pg alt" data-pages="certificates">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-certificate"></i>Certifications</span><h2>Machine learning, deep learning and computer vision</h2><p>Every card opens the official Coursera verification page. Click a certificate to enlarge it.</p></div>
     <div class="card reveal cert-intro"><b>What I learned:</b> supervised and unsupervised learning, neural networks and decision trees, recommender systems and reinforcement learning from Andrew Ng's Machine Learning Specialization, real-time computer vision with OpenCV, model building with scikit-learn, and data exploration before modelling. Around that I picked up SQL, web development and spreadsheet skills.</div>
@@ -599,7 +600,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- JOURNEY -->
-<section id="education">
+<section id="education" class="pg" data-pages="education">
   <div class="circuit"></div>
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-graduation-cap"></i>Education</span><h2>Education and learning</h2><p>Degree, school, courses and workshops.</p></div>
@@ -642,7 +643,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   </div>
 </section>
 
-<section id="leadership" class="alt">
+<section id="leadership" class="pg alt" data-pages="leadership">
   
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-people-group"></i>Leadership</span><h2>Leadership and volunteering</h2><p>Clubs, student branches, organising and volunteer work.</p></div>
@@ -707,7 +708,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   </div>
 </section>
 
-<section id="achievements">
+<section id="achievements" class="pg" data-pages="achievements">
   <div class="circuit"></div>
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-trophy"></i>Achievements</span><h2>Awards and competitions</h2><p>Hackathons, olympiads, contests and awards.</p></div>
@@ -806,7 +807,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="alt">
+<section id="contact" class="pg alt" data-pages="contact">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow"><i class="fa-solid fa-paper-plane"></i>Contact</span><h2>Let's work together</h2><p>Open to AI/ML engineer, computer vision engineer and research assistant roles, remote or on-site, plus internships and collaboration.</p></div>
     <div class="contact-grid">
