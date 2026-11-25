@@ -394,18 +394,15 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
   <div class="wrap nav-in">
     <a href="#home" class="logo"><span class="logo-badge">F</span>Feroz<span class="dot">.</span></a>
     <ul class="links" id="links">
-      <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#demos">Demos</a></li>
-      <li><a href="#kaggle">Kaggle</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#leadership">Leadership</a></li>
-      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#home" class="active" data-p="home">Home</a></li>
+      <li><a href="#projects" data-p="projects">Projects</a></li>
+      <li><a href="#kaggle" data-p="kaggle">Kaggle</a></li>
+      <li><a href="#certificates" data-p="certificates">Certificates</a></li>
+      <li><a href="#achievements" data-p="achievements">Achievements</a></li>
+      <li><a href="#leadership" data-p="leadership">Leadership</a></li>
+      <li><a href="#education" data-p="education">Education</a></li>
     </ul>
-    <a href="#contact" class="btn sm nav-cta">Contact</a>
+    <a href="#contact" class="btn sm nav-cta" data-p="contact">Contact</a>
     <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
   </div>
 </nav>
@@ -960,13 +957,36 @@ const navEl=document.querySelector('nav');
 const onScrollFx=()=>{navEl.classList.toggle('scrolled',scrollY>40);};
 addEventListener('scroll',onScrollFx,{passive:true});onScrollFx();
 
-/* ---------- active nav + mobile menu ---------- */
-const links=[...document.querySelectorAll('.links a')];
-const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
-addEventListener('scroll',()=>{let cur=0;secs.forEach((s,k)=>{if(s&&s.getBoundingClientRect().top<140)cur=k;});links.forEach((a,k)=>a.classList.toggle('active',k===cur));},{passive:true});
+/* ---------- pages: Home + one page per button ---------- */
+const PAGES=['home','projects','kaggle','certificates','achievements','leadership','education','contact'];
+const ALIAS={about:'home',skills:'home',research:'home',demos:'projects',certifications:'certificates'};
+const pgEls=[...document.querySelectorAll('.pg')];
+const navLinks=[...document.querySelectorAll('[data-p]')];
 const menu=document.getElementById('links');
+function pageOf(h){
+  if(PAGES.includes(h))return h;
+  if(ALIAS[h])return ALIAS[h];
+  const el=document.getElementById(h),host=el&&el.closest('.pg');
+  return host?host.dataset.pages.split(' ')[0]:'home';
+}
+let curPage=null;
+function show(page){
+  if(page===curPage)return;curPage=page;
+  pgEls.forEach(el=>{const on=el.dataset.pages.split(' ').includes(page);el.classList.toggle('off',!on);});
+  navLinks.forEach(a=>a.classList.toggle('active',a.dataset.p===page));
+}
+function route(){
+  const h=decodeURIComponent(location.hash.replace(/^#\/?/,''))||'home';
+  show(pageOf(h));
+  const target=!PAGES.includes(h)&&document.getElementById(h);
+  if(target&&h!=='home'){target.scrollIntoView({behavior:'instant',block:'start'});}
+  else scrollTo({top:0,behavior:'instant'});
+  menu.classList.remove('open');
+}
+addEventListener('hashchange',route);
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;if(a.getAttribute('href')===location.hash){e.preventDefault();route();}});
+route();
 document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
-links.forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
 
 /* ---------- contact form (opens the visitor's email app) ---------- */
 document.getElementById('cform').addEventListener('submit',e=>{
