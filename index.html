@@ -401,6 +401,9 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
     <a href="#home" class="logo"><span class="logo-badge">F</span>Feroz<span class="dot">.</span></a>
     <ul class="links" id="links">
       <li><a href="#home" class="active" data-p="home">Home</a></li>
+      <li><a href="#ml" data-p="ml">ML</a></li>
+      <li><a href="#dl" data-p="dl">Deep Learning</a></li>
+      <li><a href="#cv" data-p="cv">Computer Vision</a></li>
       <li><a href="#projects" data-p="projects">Projects</a></li>
       <li><a href="#kaggle" data-p="kaggle">Kaggle</a></li>
       <li><a href="#certificates" data-p="certificates">Certificates</a></li>
@@ -980,11 +983,34 @@ const onScrollFx=()=>{navEl.classList.toggle('scrolled',scrollY>40);};
 addEventListener('scroll',onScrollFx,{passive:true});onScrollFx();
 
 /* ---------- pages: Home + one page per button ---------- */
-const PAGES=['home','projects','kaggle','certificates','achievements','leadership','education','contact'];
+const PAGES=['home','ml','dl','cv','projects','kaggle','certificates','achievements','leadership','education','contact'];
 const ALIAS={about:'home',skills:'home',research:'home',demos:'projects',certifications:'certificates'};
+const TOPICS={
+  ml:{icon:'fa-solid fa-chart-pie',eb:'Machine Learning',h:'Machine learning, end to end',p:'Regression, classification, feature engineering, evaluation and Kaggle practice, backed by the Stanford and DeepLearning.AI specialization.',f:'ml',certs:['ml-spec','ml-supervised','ml-advanced','ml-unsupervised','ibm-ml-python','ibm-eda'],act:[['#kaggle','fa-brands fa-kaggle','Kaggle notebooks'],['#certificates','fa-solid fa-certificate','All certificates']]},
+  dl:{icon:'fa-solid fa-brain',eb:'Deep Learning',h:'Neural networks that ship',p:'CNNs, transfer learning, Transformers and detectors trained in PyTorch and TensorFlow.',f:'dl',certs:['ml-advanced','ml-spec'],act:[['#projects','fa-solid fa-laptop-code','All projects'],['#kaggle','fa-brands fa-kaggle','Kaggle notebooks']]},
+  cv:{icon:'fa-solid fa-eye',eb:'Computer Vision',h:'Teaching machines to see',p:'Detection, tracking, face recognition and OCR, from a trained model to a working app.',f:'cv',certs:['opencv'],act:[['#demos','fa-solid fa-circle-play','Watch demos'],['#projects','fa-solid fa-laptop-code','All projects']]}
+};
 const pgEls=[...document.querySelectorAll('.pg')];
 const navLinks=[...document.querySelectorAll('[data-p]')];
 const menu=document.getElementById('links');
+const observeNew=root=>root.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('in'));
+function buildTopic(k){
+  const T=TOPICS[k];
+  document.getElementById('tp-eb').innerHTML=`<i class="${T.icon}"></i>${T.eb}`;
+  document.getElementById('tp-h').textContent=T.h;
+  document.getElementById('tp-p').textContent=T.p;
+  document.getElementById('tp-act').innerHTML=T.act.map(([h,ic,t],i)=>`<a href="${h}" class="btn sm${i?' ghost':''}"><i class="${ic}"></i>${t}</a>`).join('');
+  const clone=el=>{const c=el.cloneNode(true);c.classList.remove('hide','in','done','tilting');c.style.transform='';c.style.removeProperty('--rd');return c;};
+  const fill=(id,els)=>{const box=document.getElementById(id);box.replaceChildren(...els.map(clone));};
+  fill('tp-skills',[...document.querySelectorAll('#skill-grid .skill')].filter(x=>x.dataset.c.split(' ').includes(T.f)));
+  const pr=[...document.querySelectorAll('#proj-grid .proj')].filter(x=>x.dataset.c.split(' ').includes(T.f));
+  fill('tp-projs',pr);
+  document.getElementById('tp-ph').style.display=document.getElementById('tp-projs').style.display=pr.length?'':'none';
+  const ce=T.certs.map(key=>{const b=document.querySelector(`[data-full="img/cert-${key}.jpg"]`);return b&&b.closest('.card');}).filter(Boolean);
+  fill('tp-certs',ce);
+  document.getElementById('tp-ch').style.display=document.getElementById('tp-certs').style.display=ce.length?'':'none';
+  observeNew(document.getElementById('topic'));
+}
 function pageOf(h){
   if(PAGES.includes(h))return h;
   if(ALIAS[h])return ALIAS[h];
@@ -994,6 +1020,7 @@ function pageOf(h){
 let curPage=null;
 function show(page){
   if(page===curPage)return;curPage=page;
+  if(TOPICS[page])buildTopic(page);
   pgEls.forEach(el=>{const on=el.dataset.pages.split(' ').includes(page);el.classList.toggle('off',!on);});
   navLinks.forEach(a=>a.classList.toggle('active',a.dataset.p===page));
 }
