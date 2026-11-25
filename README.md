@@ -18,7 +18,9 @@ Files:
    - New skill: copy one `["...", "...", "..."],` line in `SKILLS`.
 3. Save, open `index.html` in a browser to check, then push to GitHub. Vercel redeploys automatically.
 
-Text in other sections (About, Kaggle numbers, Certifications, Education, Leadership, Research interests) lives in `index.html`: search for the words you want to change and edit them there. In the Journey section, Education is the first `<div class="tl">` and Leadership the second; they are shown one under the other.
+Text in other sections (About, Kaggle numbers, Certifications, Education, Leadership, Research interests) lives in `index.html`: search for the words you want to change and edit them there. The site works like a few pages: the buttons at the top (Home, ML, Deep Learning, Computer Vision, Projects, Kaggle, Certificates, Achievements, Leadership, Education, Contact) each open one page. Education, Leadership and Achievements are three separate sections in `index.html` (`id="education"`, `id="leadership"`, `id="achievements"`), each with its own `<div class="tl">` timeline: move a `tl-item` block from one to another to change where it shows.
+
+The ML, Deep Learning and Computer Vision pages fill themselves: skills and projects appear there when their category in `data.js` contains `ml`, `dl` or `cv`, and the certificates come from the `TOPICS` list in the script at the bottom of `index.html` (the `certs` keys).
 
 ## Deploy on Vercel
 
