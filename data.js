@@ -161,7 +161,8 @@ const SKILLS = [
 ];
 
 /* ---------- 4. Projects ----------
-   t = title, tag = small label, c = categories (cv dl ai ml sw),
+   t = title, tag = small label, c = categories (cv dl ai ml sw; cv, dl and ml also
+   decide which of the Computer Vision, Deep Learning and ML pages shows the project),
    g = header colour g1..g5, i = icon, d = description,
    m = highlight box (optional), s = tech tags, l = buttons [["GitHub","url"],["Kaggle","url"]],
    lead: true shows a "Team leader" badge, img = photo for the card header,
