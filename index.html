@@ -389,11 +389,14 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 
 /* ---------- pages ---------- */
 .pg.off{display:none!important}
+.pg.enter{animation:pgIn .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .one{max-width:920px;margin:0 auto}
 .tp-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:-10px 0 14px}
 #topic .cert-group:first-of-type{margin-top:10px}
 .links a.active,.nav-cta.active{color:#fff;background:rgba(34,211,238,.14)}
 .btn.nav-cta.active{background:var(--accent);color:#06101f}
+@media (prefers-reduced-motion:reduce){.pg.enter{animation:none}}
 </style>
 </head>
 <body>
@@ -987,6 +990,7 @@ addEventListener('scroll',onScrollFx,{passive:true});onScrollFx();
 /* ---------- pages: Home + one page per button ---------- */
 const PAGES=['home','ml','dl','cv','projects','kaggle','certificates','achievements','leadership','education','contact'];
 const ALIAS={about:'home',skills:'home',research:'home',demos:'projects',certifications:'certificates'};
+const TITLES={home:'Md Feroz Ahmed · AI/ML and Computer Vision',ml:'Machine Learning',dl:'Deep Learning',cv:'Computer Vision',projects:'Projects',kaggle:'Kaggle',certificates:'Certificates',achievements:'Achievements',leadership:'Leadership',education:'Education',contact:'Contact'};
 const TOPICS={
   ml:{icon:'fa-solid fa-chart-pie',eb:'Machine Learning',h:'Machine learning, end to end',p:'Regression, classification, feature engineering, evaluation and Kaggle practice, backed by the Stanford and DeepLearning.AI specialization.',f:'ml',certs:['ml-spec','ml-supervised','ml-advanced','ml-unsupervised','ibm-ml-python','ibm-eda'],act:[['#kaggle','fa-brands fa-kaggle','Kaggle notebooks'],['#certificates','fa-solid fa-certificate','All certificates']]},
   dl:{icon:'fa-solid fa-brain',eb:'Deep Learning',h:'Neural networks that ship',p:'CNNs, transfer learning, Transformers and detectors trained in PyTorch and TensorFlow.',f:'dl',certs:['ml-advanced','ml-spec'],act:[['#projects','fa-solid fa-laptop-code','All projects'],['#kaggle','fa-brands fa-kaggle','Kaggle notebooks']]},
@@ -1023,8 +1027,9 @@ let curPage=null;
 function show(page){
   if(page===curPage)return;curPage=page;
   if(TOPICS[page])buildTopic(page);
-  pgEls.forEach(el=>{const on=el.dataset.pages.split(' ').includes(page);el.classList.toggle('off',!on);});
+  pgEls.forEach(el=>{const on=el.dataset.pages.split(' ').includes(page);el.classList.toggle('off',!on);el.classList.remove('enter');if(on){void el.offsetWidth;el.classList.add('enter');}});
   navLinks.forEach(a=>a.classList.toggle('active',a.dataset.p===page));
+  document.title=page==='home'?TITLES.home:TITLES[page]+' · Md Feroz Ahmed';
 }
 function route(){
   const h=decodeURIComponent(location.hash.replace(/^#\/?/,''))||'home';
